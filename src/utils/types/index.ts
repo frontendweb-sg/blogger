@@ -1,33 +1,7 @@
-/**
- * Represents the state of an action, including its message, status, errors, and data.
- */
 export interface ActionState {
-  /**
-   * A message describing the current state or result of the action.
-   */
   message: string;
-
-  /**
-   * The status of the action, which can be one of the following:
-   * - "idle": The action is idle.
-   * - "warning": There is a warning related to the action.
-   * - "success": The action was successful.
-   * - "error": There was an error with the action.
-   *
-   * This property is optional.
-   */
   status?: "idle" | "warning" | "success" | "error";
-
-  /**
-   * An optional object containing errors related to the action.
-   * The keys are error identifiers, and the values are error messages.
-   */
   errors?: Record<string, string>;
-
-  /**
-   * An optional object containing data related to the action.
-   * This can be null or any object.
-   */
   data?: null | object;
 }
 
@@ -51,4 +25,27 @@ export type HttpResponse<T> = {
 
 export interface IHttpOptions extends RequestInit {
   body?: string | null;
+}
+
+export enum EventType {
+  USER_LOGIN = "USER_LOGIN",
+  USER_LOGOUT = "USER_LOGOUT",
+  USER_REGISTRATION = "USER_REGISTRATION",
+  USER_AUTH_FAILURE = "USER_AUTH_FAILURE",
+  ACCESS_GRANTED = "ACCESS_GRANTED",
+  ACCESS_DENIED = "ACCESS_DENIED",
+  CONTENT_CREATED = "CONTENT_CREATED",
+  CONTENT_UPDATED = "CONTENT_UPDATED",
+  CONTENT_DELETED = "CONTENT_DELETED",
+  API_REQUEST = "API_REQUEST",
+  API_ERROR = "API_ERROR",
+  ERROR_OCCURRED = "ERROR_OCCURRED",
+  PAYMENT_INITIATED = "PAYMENT_INITIATED",
+  PAYMENT_SUCCESS = "PAYMENT_SUCCESS",
+  PAYMENT_FAILURE = "PAYMENT_FAILURE",
+  SYSTEM_STARTUP = "SYSTEM_STARTUP",
+  SYSTEM_SHUTDOWN = "SYSTEM_SHUTDOWN",
+  SERVER_ERROR = "SERVER_ERROR",
+  USER_ACTIVITY = "USER_ACTIVITY",
+  REDIRECT = "REDIRECT",
 }

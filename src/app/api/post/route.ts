@@ -1,8 +1,8 @@
+import { auth } from "@/auth";
 import { BadRequestError, CustomError } from "@/lib/errors";
 import { errorHandler } from "@/lib/middleware/error-handler";
 import { Post } from "@/lib/model";
 import { DEFAULT_LIMIT, DEFAULT_PAGE, MAX_LIMIT } from "@/utils/constants";
-import next from "next";
 import { NextRequest, NextResponse } from "next/server";
 import { Op } from "sequelize";
 
@@ -27,6 +27,8 @@ const POST_ATTRIBUTES = [
 ];
 export async function GET(req: NextRequest) {
   try {
+    const session = await auth();
+    console.log("S", session);
     // get query params
     const query = req.nextUrl.searchParams;
 

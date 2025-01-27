@@ -1,4 +1,4 @@
-import NextAuth, { AuthError, DefaultSession } from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import Credentials from "next-auth/providers/credentials";
 import { User } from "./lib/model";

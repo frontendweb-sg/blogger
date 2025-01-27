@@ -34,7 +34,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-slate-900 text-black dark:text-white`}
       >
         <ToastContainer />
-        <AppProvider session={session}>{children}</AppProvider>
+        <AppProvider session={session}>{children} </AppProvider>
       </body>
     </html>
   );

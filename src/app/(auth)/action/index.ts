@@ -1,9 +1,10 @@
 "use server";
-import { signOut, signIn } from "@/auth";
+import { signOut, signIn, auth } from "@/auth";
 import { zodError } from "@/lib/zod-error";
 import { http } from "@/network/http";
 import { ActionState } from "@/utils/types";
 import { User } from "next-auth";
+import { redirect } from "next/navigation";
 
 import { z } from "zod";
 
@@ -37,7 +38,10 @@ export async function login(
     return { ...prevState, errors: zodError(parse.error) };
   }
 
-  await signIn("credentials", { ...parse.data });
+  await signIn("credentials", {
+    ...parse.data,
+    redirectTo: "/user/dashboard",
+  });
 
   return prevState;
 }

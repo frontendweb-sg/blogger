@@ -13,7 +13,6 @@ export default function RegisterForm() {
   const [state, formAction, pending] = useActionState(register, {
     message: "",
   });
-
   useEffect(() => {
     if (state.status === "error") {
       // redirect to dashboard
