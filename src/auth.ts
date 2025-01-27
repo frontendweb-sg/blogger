@@ -3,7 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import Credentials from "next-auth/providers/credentials";
 import { User } from "./lib/model";
 import "next-auth/jwt";
-import { http } from "./networ/http";
+import { http } from "./network/http";
 
 interface IUser extends User {
   id: string;

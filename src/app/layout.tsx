@@ -5,6 +5,7 @@ import AppProvider from "@/providers/app";
 import Header from "@/components/layout/header";
 
 import { auth } from "@/auth";
+import { ToastContainer } from "react-toastify";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-slate-900 text-black dark:text-white`}
       >
+        <ToastContainer />
         <AppProvider session={session}>{children}</AppProvider>
       </body>
     </html>

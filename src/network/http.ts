@@ -12,7 +12,7 @@ export async function http<T>(
       "Content-Type": "application/json",
       ...headers,
     },
-    body: body ?? undefined,
+    body: body,
     ...options,
   };
 
@@ -20,8 +20,8 @@ export async function http<T>(
     const response = await fetch(url, config);
 
     if (!response.ok) {
-      // For non-OK responses, assume the body contains error information
       const data = await response.json();
+      // For non-OK responses, assume the body contains error information
       throw createErrorResponse(data, response, config);
     }
 
@@ -29,6 +29,7 @@ export async function http<T>(
     const data = await response.json();
     return createSuccessResponse(data, response, config);
   } catch (error) {
+    console.log("E", error);
     // Catch unexpected errors like network issues or parsing errors
     const errorResponse = (error as HttpResponse<T>)
       ? error

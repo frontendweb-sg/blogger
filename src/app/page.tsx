@@ -15,6 +15,7 @@ export default async function Home() {
           minima, alias consectetur recusandae repellendus porro obcaecati!
           Aliquid officiis, nostrum odit numquam accusantium cupiditate error
           quia rem eum voluptatibus illum placeat?
+          {JSON.stringify(session)}
         </p>
         <div className="flex justify-center mt-5">
           <Link href="/login">Login</Link>

@@ -18,9 +18,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    console.log("body", body);
     const parse = signupSchema.safeParse(body);
-    console.log(parse.error, "errors");
     if (!parse.success) {
       throw new ValidationError(parse.error.errors);
     }
@@ -28,7 +26,10 @@ export async function POST(req: Request) {
     // check user exists
     const user = await User.findOne({ where: { email: body.email } });
     if (user) {
-      throw new BadRequestError("User already exists");
+      throw new BadRequestError(
+        `${body.email} already associated with another user, please use another email!`,
+        "email"
+      );
     }
 
     // create user

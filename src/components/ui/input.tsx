@@ -1,5 +1,7 @@
+import clsx from "clsx";
 import type { IconNode } from "lucide-react";
 import { Icon } from "lucide-react";
+import { Box } from "./box";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -7,7 +9,10 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   endIcon?: IconNode;
   error?: string;
   inline?: boolean;
+  noGutter?: boolean;
+  required?: boolean;
 };
+
 export default function Input({
   label,
   startIcon,
@@ -15,24 +20,36 @@ export default function Input({
   error,
   inline,
   className,
+  noGutter,
+  required,
   ...rest
 }: InputProps) {
   return (
-    <div
-      className={`mb-3 ${
-        inline ? "flex flex-row items-center justify-between" : ""
-      } ${className}`}
-    >
-      {label && <label className="mb-1 block text-sm">{label}</label>}
-      <div className="rounded-lg border overflow-hidden">
+    <Box className={clsx(!noGutter && "mb-4", className)}>
+      {label && (
+        <label className="mb-2 block text-xs">
+          {label} {required && <span className="text-red-500">*</span>}
+        </label>
+      )}
+      <div
+        className={clsx(
+          "rounded-lg ring-1 ring-white hover:ring-gray-600",
+          error && "ring-red-500 placeholder:text-red-500"
+        )}
+      >
         {startIcon && <Icon iconNode={startIcon} />}
         <input
-          className="outline-none text-sm p-3 w-full    text-slate-900"
+          className={clsx(
+            "outline-none bg-transparent border-none rounded-lg text-sm p-3 w-full",
+            error && "placeholder:text-red-500"
+          )}
           {...rest}
         />
         {endIcon && <Icon iconNode={endIcon} />}
       </div>
-      {error && <div>{error}</div>}
-    </div>
+      {error && (
+        <div className="text-[11px] text-red-500 block mt-1">{error}</div>
+      )}
+    </Box>
   );
 }
