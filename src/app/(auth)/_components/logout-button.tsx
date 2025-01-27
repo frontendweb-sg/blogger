@@ -1,4 +1,4 @@
-import Button from "../ui/button";
+import Button from "../../../components/ui/button";
 import { logout } from "@/app/(auth)/action";
 
 export default function LogoutButton() {

@@ -1,15 +1,17 @@
 "use client";
 
-import Form from "../ui/form";
-import Input from "../ui/input";
+import Form from "../../../components/ui/form";
+import Input from "../../../components/ui/input";
 import { login } from "@/app/(auth)/action";
 
 import { useActionState } from "react";
-import SubmitButton from "../ui/submit-button";
+import SubmitButton from "../../../components/ui/submit-button";
 import Link from "next/link";
 
 export default function LoginForm() {
-  const [state, formAction, pending] = useActionState(login, { message: "" });
+  const [state, formAction, pending] = useActionState(login, {
+    message: "",
+  });
 
   return (
     <Form

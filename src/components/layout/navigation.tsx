@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ThemeButton } from "../ui/theme-button";
 import { LogInIcon } from "lucide-react";
 import { auth } from "@/auth";
-import LogoutButton from "../auth/logout-button";
+import LogoutButton from "../../app/(auth)/_components/logout-button";
 
 export default async function Navigation() {
   const session = await auth();

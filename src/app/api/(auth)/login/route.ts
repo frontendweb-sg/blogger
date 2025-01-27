@@ -27,13 +27,13 @@ export async function POST(req: Request) {
 
     const user = (await User.findOne({ where: { email } })) as User;
     if (!user) {
-      throw new AuthError("Invalid email or password");
+      throw new AuthError("Invalid email", "email");
     }
 
     const isMatch = await Password.compare(password, user.password);
 
     if (!isMatch) {
-      throw new AuthError("Invalid  password");
+      throw new AuthError("Invalid  password", "password");
     }
 
     const token = Jwt.token({

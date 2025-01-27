@@ -2,13 +2,15 @@ import NextAuth, { AuthError, DefaultSession } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import Credentials from "next-auth/providers/credentials";
 import { User } from "./lib/model";
-import { DefaultJWT } from "next-auth/jwt";
+import "next-auth/jwt";
+import { http } from "./networ/http";
 
 interface IUser extends User {
   id: string;
   emailVerified: Date;
   token: string;
 }
+
 declare module "next-auth/jwt" {
   interface JWT {
     user?: IUser;
@@ -21,6 +23,9 @@ declare module "next-auth" {
   }
 }
 
+/**
+ * NextAuth configuration
+ */
 const { auth, handlers, signIn, signOut, unstable_update } = NextAuth({
   providers: [
     Credentials({
@@ -28,20 +33,13 @@ const { auth, handlers, signIn, signOut, unstable_update } = NextAuth({
         email: { label: "Username" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        const { email, password } = credentials;
+      async authorize({ email, password }) {
+        const response = await http("login", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+        });
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/login`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-          }
-        );
-        const user = await response.json();
-        if (!response.ok) throw new AuthError("Invalid credentials");
-        return user;
+        return response.data!;
       },
     }),
   ],
