@@ -1,0 +1,28 @@
+### CREATE USER
+post http://localhost:3000/api/signup
+Content-Type: application/json
+
+{
+    "first_name": "Pradeep",
+    "last_name": "Kumar",
+    "email": "pradeep.kumar5@rsystems.com",
+    "password": "Admin$123@",
+    "mobile":"9876543210"
+}
+
+
+### LOGIN
+post http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "pradeep.kumar5@rsystems.com",
+  "password": "Admin$123@"
+}
+
+### Get all posts
+get http://localhost:3000/api/post?page=1&limit=10&order=desc
+Content-Type: application/json
+
+Authorization
+Bearer <token>
